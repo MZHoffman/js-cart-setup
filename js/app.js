@@ -33,9 +33,7 @@
           'text-capitalize',
           'my-3'
         )
-
         cartItem.innerHTML = `
-        
             <img src="${item.img}" class="img-fluid rounded-circle" id="item-img" alt="">
             <div class="item-text">
 
@@ -45,14 +43,30 @@
             </div>
             <a href="#" id='cart-item-remove' class="cart-item-remove">
               <i class="fas fa-trash"></i>
-            </a>
-          </div>`
+            </a>`
 
         const cart = document.getElementById('cart')
         const total = document.querySelector('.cart-total-container')
         cart.insertBefore(cartItem, total)  
-        alert("Iteam added")
+        //alert("Iteam added")
+        showTotals()
       }
     })
   })
+  function showTotals(){
+    let cartItemsPrices = document.querySelectorAll(".cart-item-price")
+    let total = 0
+ 
+    cartItemsPrices.forEach(i => {
+      total += parseFloat(i.innerHTML)
+    })
+    console.log(total.toFixed(2))
+    let cartTotal = total.toFixed(2)
+    const cartDispalyTotalBottom = document.getElementById("cart-total")
+    const cartDispalyTotalTop = document.querySelector(".item-total")
+    const itemCount = document.getElementById("item-count")
+    cartDispalyTotalBottom.innerText = cartTotal
+    cartDispalyTotalTop.innerText = cartTotal
+    itemCount.innerText = cartItemsPrices.length
+    }
 })()
